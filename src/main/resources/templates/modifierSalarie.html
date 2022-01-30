@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un salarié</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+</head>
+<body>
+  <div class="container">
+        <h1>Management des salariés</h1>
+        <hr>
+       <h2>Mise à jour salarié</h2>
+
+  		<form action="#" th:action="@{/salarie/ajouterSalarie}" th:object="${salarie}" method="GET">
+
+            <label for="nom">Nom</label>
+            <input id="nom" type="text" th:field="*{nom}" placeholder="Nom du salarié" class="form-control mb-4 col-4">
+            <label for="prenom">Prénom</label>
+            <input id="prenom" type="text" th:field="*{prenom}" placeholder="Prénom du salarié" class="form-control mb-4 col-4">
+            <label for="login">Login</label>
+            <input id="login" type="text" th:field="*{login}" placeholder="login du salarié" class="form-control mb-4 col-4">
+            <label for="password">Mot de passe</label>
+            <input id="password" type="password" th:field="*{password}" placeholder="mot de pass" class="form-control mb-4 col-4">
+            <label for="solde">Solde de congé</label>
+            <input id="solde" type="number" th:field="*{solde}" placeholder="solde congé" class="form-control mb-4 col-4">
+            <label for="date_embauche">Date d'embauche</label>
+            <input id="date_embauche" type="date" th:field="*{date_embauche}"  class="form-control mb-4 col-4">
+            <label for="fonction"></label>
+            <select th:field="*{fonction}" id="fonction" class="form-control mb-4 col-4">
+    			<option th:value="'standard'">Salarié</option>
+    			<option th:value="'chefProjet'">Chef de projet</option>
+    			<option th:value="'responsableRh'">Responsable Ressources Humains</option>
+			</select>
+            <label for="groupe"></label>
+            <select th:field="*{groupe}" id="groupe" class="form-control mb-4 col-4">
+    			<option th:value="1">Administrateurs</option>
+    			<option th:value="2">Projet N° 1</option>
+    			<option th:value="3">Projet N° 2</option>
+    			<option th:value="4">Projet N° 3</option>
+			</select>
+            
+            
+
+            <button type="submit" class="btn btn-info col-2"> Enregistrer modifications</button>
+        </form>
+
+        <hr>
+
+        <a th:href="@{/salarie/listSalarie}"> Back to Employee List</a>
+</div>
+</body>
+</html>

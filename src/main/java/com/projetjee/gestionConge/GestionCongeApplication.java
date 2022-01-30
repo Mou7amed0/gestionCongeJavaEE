@@ -7,19 +7,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GestionCongeApplication implements CommandLineRunner {
+public class GestionCongeApplication implements CommandLineRunner{
 	@Autowired
 	private IdemandeCongeInit idemandeCongeInit;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(GestionCongeApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		idemandeCongeInit.initGroupe();
-		idemandeCongeInit.initSalarie();
-		idemandeCongeInit.initDemande();
+		//idemandeCongeInit.initGroupe();
+		//idemandeCongeInit.initSalarie();
+		//idemandeCongeInit.initDemande();
 
 	}
 }

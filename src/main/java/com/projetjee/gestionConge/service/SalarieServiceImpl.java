@@ -41,4 +41,5 @@ public class SalarieServiceImpl implements ISalarieService{
     public List<Salarie> listSalarie() {
         return salarieRepository.findAll();
     }
+    
 }

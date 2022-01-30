@@ -3,11 +3,13 @@ package com.projetjee.gestionConge.web;
 import com.projetjee.gestionConge.entities.Groupe;
 import com.projetjee.gestionConge.service.IGroupeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path = "/groupe")
 public class GroupeController {
 
@@ -29,8 +31,18 @@ public class GroupeController {
     public void removeGroupe(@PathVariable(name="id")Long id){
         iGroupeService.removeGroupe(iGroupeService.getGroupeById(id));
     }
+    
+   /* @GetMapping(path="/listSalarie")
+    public String listSalarie(Model model){
+        List<Salarie> listSalarie= iSalarieService.listSalarie();
+        model.addAttribute("employes",listSalarie);
+        return "employes";
+    }*/
+    
     @GetMapping(path="/listGroupe")
-    public List<Groupe> listGroupe(){
-        return iGroupeService.listGroupe();
+    public String listGroupe(Model model){
+    	List<Groupe> listGroupes= iGroupeService.listGroupe();
+        model.addAttribute("groupes",listGroupes);
+        return "groupes";
     }
 }

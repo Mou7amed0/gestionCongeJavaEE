@@ -2,11 +2,17 @@ package com.projetjee.gestionConge.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 
 @Entity
+
 public class Salarie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +23,7 @@ public class Salarie implements Serializable {
     private String login;
     private String password;
     private Integer solde;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date_embauche;
     @Enumerated(EnumType.STRING)
     private Fonction fonction;
@@ -36,6 +43,7 @@ public class Salarie implements Serializable {
     }
 
     @OneToMany(mappedBy = "salarie",fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Collection<DemandeConge> demandeConges;
 
     public Salarie(String nom, String prenom, String login, String password, Integer solde, LocalDate date_embauche, Fonction fonction) {
