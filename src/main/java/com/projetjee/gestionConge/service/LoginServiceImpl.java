@@ -6,8 +6,8 @@ import com.projetjee.gestionConge.entities.Salarie;
 public class LoginServiceImpl implements ILoginService {
 
 	@Override
-	public Salarie connextion(Login landp) {
-		// TODO Auto-generated method stub
+	public Salarie connextion(Login lp) {
+		
 		return null;
 	}
 

@@ -1,4 +1,5 @@
 package com.projetjee.gestionConge.entities;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;

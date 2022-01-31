@@ -1,5 +1,4 @@
 package com.projetjee.gestionConge.service;
-
 import com.projetjee.gestionConge.entities.Groupe;
 import com.projetjee.gestionConge.repository.GroupeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
