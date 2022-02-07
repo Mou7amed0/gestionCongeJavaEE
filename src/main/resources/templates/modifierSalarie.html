@@ -14,8 +14,9 @@
         <hr>
        <h2>Mise à jour salarié</h2>
 
-  		<form action="#" th:action="@{/salarie/ajouterSalarie}" th:object="${salarie}" method="GET">
-
+  		<form action="#" th:action="@{/salarie/modifierSalarie}" th:object="${salarie}" method="GET">
+			<label for="id">ID salarié</label>
+			<input id="id" type="text" th:field="*{id_salarie}" class="form-control mb-4 col-4" disabled>
             <label for="nom">Nom</label>
             <input id="nom" type="text" th:field="*{nom}" placeholder="Nom du salarié" class="form-control mb-4 col-4">
             <label for="prenom">Prénom</label>

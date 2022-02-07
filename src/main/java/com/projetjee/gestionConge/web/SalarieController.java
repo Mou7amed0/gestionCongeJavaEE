@@ -20,10 +20,10 @@ public class SalarieController {
     public SalarieController(ISalarieService iSalarieService) {
         this.iSalarieService = iSalarieService;
     }
-    @PostMapping(path = "/add")
-    public Salarie addSalarie(@RequestBody Salarie salarie){
-        return iSalarieService.addSalarie(salarie);
-    }
+//    @PostMapping(path = "/add")
+//    public Salarie addSalarie(@RequestBody Salarie salarie){
+//        return iSalarieService.addSalarie(salarie);
+//    }
     
     @GetMapping("/ajouterNouveauSalarie")
     public String ajouter(Model model){
@@ -48,6 +48,14 @@ public class SalarieController {
         return "modifierSalarie";
     }
     
+    @GetMapping("/modifierSalarie")
+    public String modifierSalarie(@ModelAttribute("salarie") Salarie salarie){
+        // Ajouter le salarié à la base de données
+        iSalarieService.updateSalarie(salarie);
+        return "redirect:/salarie/listSalarie";
+    }
+    
+    
     @GetMapping(path = "/remove/{id}")
     public String removeSalarie(@PathVariable(name="id")Long id){
         iSalarieService.removeSalarie(iSalarieService.getSalarieById(id));
@@ -58,6 +66,13 @@ public class SalarieController {
     
     @GetMapping(path="/listSalarie")
     public String listSalarie(Model model){
+        List<Salarie> listSalarie= iSalarieService.listSalarie();
+        model.addAttribute("employes",listSalarie);
+        return "employes";
+    }
+    
+    @GetMapping(path="/home")
+    public String listSalaries(Model model){
         List<Salarie> listSalarie= iSalarieService.listSalarie();
         model.addAttribute("employes",listSalarie);
         return "employes";

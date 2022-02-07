@@ -14,7 +14,6 @@ public class LoginServiceImpl implements ILoginService {
 	@Override
 	public String deconnextion() {
 		
-		
 		return "redirect:/login";
 	}
 

@@ -17,24 +17,24 @@ public class LoginController {
 	private final String CHIEF = "chefDeProjet";
 	
 	@GetMapping("/login")
-    public String login(Model model) {
-    	String login = "login", password = "password";
-    	model.addAttribute("login", login);
-    	model.addAttribute("password", password);
-    	return "sign-in";
+    public String login() {
+		//    	String login = "login", password = "password";
+		//    	model.addAttribute("login", login);
+		//    	model.addAttribute("password", password);
+    	return "login";
     }
     
-    @GetMapping("/connexion")
-    public String connexion() {
-    	String role = "Admin";
-    	switch(role) {
-    	case ADMIN:
-    		return "admin-home";
-    	case CHIEF:
-    		return "chief-home";
-    	default:
-    		return "salarie-home";
-    	}
-    }
+//    @GetMapping("/connexion")
+//    public String connexion() {
+//    	String role = "admin";
+//    	switch(role) {
+//    	case "admin":
+//    		return "salarie";
+//    	case "chief":
+//    		return "chief-home";
+//    	default:
+//    		return "salarie-home";
+//    	}
+//    }
 
 }
