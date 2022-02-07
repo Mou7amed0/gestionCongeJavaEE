@@ -32,6 +32,7 @@
                                     <input style='font-size:small' class=' w-75 h-75 ' type="text" id="nom_groupe" onkeyup="myFunction2()" title="Nom du groupe">
                                 </div>
                             </th>
+                            <th class="text-secondary opacity-7">Employés</th>
                             <th class="text-secondary opacity-7"></th>
                             <th class="text-secondary opacity-7"><a th:href="@{/groupe/ajouterNouveauGroupe}" class="btn btn-success btn-sm mb-3 float-right"> Ajouter groupe </a></th>
                         </tr>
@@ -54,6 +55,13 @@
                                 <span th:text="${grp.getNom_groupe()}"  class="text-secondary text-xs font-weight-bold"></span>
                             </td>
                             
+                            <td class="align-middle text-center">
+                                <ul th:each="emp: ${grp.getSalaries()}">
+                                    <li>
+                                        <h6 th:text="${emp.getNom()}" class="mb-0 text-sm"></h6>
+                                    </li>
+                                </ul>
+                            </td>
 
                             <td class="align-middle">
                                 <a th:href="@{/groupe/modifierGroupe/{id}(id=${grp.getId_groupe()})}" class="btn btn-link text-dark px-3 mb-0" data-toggle="tooltip" data-placement="top" title="modifier" data-original-title="Edit user" ><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
