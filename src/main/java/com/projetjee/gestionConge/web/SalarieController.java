@@ -20,10 +20,6 @@ public class SalarieController {
     public SalarieController(ISalarieService iSalarieService) {
         this.iSalarieService = iSalarieService;
     }
-//    @PostMapping(path = "/add")
-//    public Salarie addSalarie(@RequestBody Salarie salarie){
-//        return iSalarieService.addSalarie(salarie);
-//    }
     
     @GetMapping("/ajouterNouveauSalarie")
     public String ajouter(Model model){

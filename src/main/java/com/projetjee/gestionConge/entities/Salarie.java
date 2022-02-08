@@ -13,16 +13,13 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 @Entity
-
 public class Salarie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_salarie;
     private String nom;
     private String prenom;
-    @Column(unique = true)
-    private String login;
-    private String password;
+
     private Integer solde;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date_embauche;
@@ -32,11 +29,13 @@ public class Salarie implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Groupe groupe;
 
-    public Salarie(String nom, String prenom, String login, String password, Integer solde, LocalDate date_embauche, Fonction fonction, Groupe groupe) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "login_id", referencedColumnName = "id")
+    private Login login;
+    public Salarie(String nom, String prenom, Login login, Integer solde, LocalDate date_embauche, Fonction fonction, Groupe groupe) {
         this.nom = nom;
         this.prenom = prenom;
         this.login = login;
-        this.password = password;
         this.solde = solde;
         this.date_embauche = date_embauche;
         this.fonction = fonction;
@@ -47,11 +46,10 @@ public class Salarie implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Collection<DemandeConge> demandeConges;
 
-    public Salarie(String nom, String prenom, String login, String password, Integer solde, LocalDate date_embauche, Fonction fonction) {
+    public Salarie(String nom, String prenom, Login login, Integer solde, LocalDate date_embauche, Fonction fonction) {
         this.nom = nom;
         this.prenom = prenom;
         this.login = login;
-        this.password = password;
         this.solde = solde;
         this.date_embauche = date_embauche;
         this.fonction = fonction;
@@ -84,20 +82,12 @@ public class Salarie implements Serializable {
         this.prenom = prenom;
     }
 
-    public String getLogin() {
+    public Login getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
+    public void setLogin(Login login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Integer getSolde() {

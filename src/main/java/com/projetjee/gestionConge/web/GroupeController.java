@@ -1,12 +1,14 @@
 package com.projetjee.gestionConge.web;
 
 import com.projetjee.gestionConge.entities.Groupe;
+import com.projetjee.gestionConge.entities.Salarie;
 import com.projetjee.gestionConge.service.IGroupeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -23,13 +25,32 @@ public class GroupeController {
     public Groupe addGroupe(@RequestBody Groupe groupe){
         return iGroupeService.addGroupe(groupe);
     }
-    @PutMapping(path = "/update")
+
+    @GetMapping("/ajouterNouveauGroupe")
+    public String ajouter(Model model){
+        Groupe groupe = new Groupe();
+        model.addAttribute("groupe", groupe);
+        return "ajouterGroupe";
+    }
+
+    @GetMapping("/ajouterGroupe")
+    public String ajouterGroupe(@ModelAttribute("groupe") Groupe groupe){
+
+        iGroupeService.addGroupe(groupe);
+        return "redirect:/groupe/listGroupe";
+
+    }
+
+    @GetMapping(path = "/update")
     public Groupe updateGroupe(@RequestBody Groupe groupe){
         return iGroupeService.updateGroupe(groupe);
     }
-    @DeleteMapping(path = "/remove/{id}")
-    public void removeGroupe(@PathVariable(name="id")Long id){
+
+    @GetMapping(path = "/remove/{id}")
+    public String removeGroupe(@PathVariable(name="id")Long id){
         iGroupeService.removeGroupe(iGroupeService.getGroupeById(id));
+
+        return "redirect:/groupe/listGroupe";
     }
     
    /* @GetMapping(path="/listSalarie")

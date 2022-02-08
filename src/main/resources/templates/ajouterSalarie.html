@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Ajouter un salarié</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container">
@@ -16,7 +16,7 @@
 
         <form action="#" th:action="@{/salarie/ajouterSalarie}" th:object="${salarie}" method="GET">
 
-		<!-- 
+		<!--
 		public Salarie(String nom, String prenom, String login, String password, Integer solde, LocalDate date_embauche, Fonction fonction, Groupe groupe) {
         this.nom = nom;
         this.prenom = prenom;
@@ -53,7 +53,7 @@
     			<option th:value="3">Projet N° 2</option>
     			<option th:value="4">Projet N° 3</option>
 			</select>
-            
+
 
             <button type="submit" class="btn btn-info col-2"> Ajouter salarié</button>
         </form>

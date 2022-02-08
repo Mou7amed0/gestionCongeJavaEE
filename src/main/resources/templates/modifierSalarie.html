@@ -16,15 +16,19 @@
 
   		<form action="#" th:action="@{/salarie/modifierSalarie}" th:object="${salarie}" method="GET">
 			<label for="id">ID salarié</label>
-			<input id="id" type="text" th:field="*{id_salarie}" class="form-control mb-4 col-4" disabled>
+            <!-- un problème se pose à ce niveau, et que la modification ne se fait pas, une insertion d'un nouveau salarié-->
+			<input id="id" type="text" th:field="*{id_salarie}" class="form-control mb-4 col-4" hidden>
+            <span th:text="*{id_salarie}" class="form-control mb-4 col-4"></span>
             <label for="nom">Nom</label>
             <input id="nom" type="text" th:field="*{nom}" placeholder="Nom du salarié" class="form-control mb-4 col-4">
             <label for="prenom">Prénom</label>
             <input id="prenom" type="text" th:field="*{prenom}" placeholder="Prénom du salarié" class="form-control mb-4 col-4">
             <label for="login">Login</label>
             <input id="login" type="text" th:field="*{login}" placeholder="login du salarié" class="form-control mb-4 col-4">
-            <label for="password">Mot de passe</label>
-            <input id="password" type="password" th:field="*{password}" placeholder="mot de pass" class="form-control mb-4 col-4">
+            <!--
+                <label for="password">Mot de passe</label>
+                <input id="password" type="password" th:field="*{password}" placeholder="mot de pass" class="form-control mb-4 col-4">
+            -->
             <label for="solde">Solde de congé</label>
             <input id="solde" type="number" th:field="*{solde}" placeholder="solde congé" class="form-control mb-4 col-4">
             <label for="date_embauche">Date d'embauche</label>
