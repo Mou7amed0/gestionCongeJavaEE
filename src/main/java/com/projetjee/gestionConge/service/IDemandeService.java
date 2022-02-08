@@ -10,7 +10,7 @@ public interface IDemandeService {
     DemandeConge updateDemandeConge(DemandeConge  demandeConge);
     DemandeConge getDemandeCongeById(Long id);
     List<DemandeConge> listDemandeConge();
-    List<DemandeConge>listDemandeCongeByGroupe(Long id);
+   // List<DemandeConge>listDemandeCongeByGroupe(Long id);
     DemandeConge validerDemandeConge(Long id);
     DemandeConge approuverDemandeConge(Long id);
     DemandeConge refuserDemandeConge(Long id);

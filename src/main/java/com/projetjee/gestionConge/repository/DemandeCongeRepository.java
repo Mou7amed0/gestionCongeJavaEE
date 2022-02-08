@@ -11,7 +11,9 @@ import java.util.List;
 @RepositoryRestResource
 public interface DemandeCongeRepository extends JpaRepository<DemandeConge,Long> {
 
-    @Query("SELECT * FROM `demande_conge` WHERE `salarie_id_salarie` in SELECT id_salarie FROM `salarie` WHERE `groupe_id_groupe`=:idGroupe ")
-    List<DemandeConge> findByGroupe(@Param("idGroupe")Long idGroupe);
+    //@Query("SELECT * FROM `demande_conge` WHERE `salarie_id_salarie` in SELECT id_salarie FROM `salarie` WHERE `groupe_id_groupe`=:idGroupe ")
+    //List<DemandeConge> findByGroupe(@Param("idGroupe")Long idGroupe);
+    @Query("select d from DemandeConge d where d.salarie.id_salarie in (select s from Salarie s where s.groupe.id_groupe= :id)")
+    List<DemandeConge> findByGroupe(@Param(value = "id") long id);
 
 }

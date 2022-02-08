@@ -4,7 +4,7 @@ import com.projetjee.gestionConge.entities.Login;
 import com.projetjee.gestionConge.entities.Salarie;
 
 public class LoginServiceImpl implements ILoginService {
-
+/*
 	@Override
 	public Salarie connextion(Login lp) {
 		
@@ -16,5 +16,5 @@ public class LoginServiceImpl implements ILoginService {
 		
 		return "redirect:/login";
 	}
-
+*/
 }

@@ -25,7 +25,7 @@ public class DemandeServiceImpl implements IDemandeService{
     private final DemandeCongeRepository demandeCongeRepository;
     private final SalarieRepository salarieRepository;
     private final CongeRepository congeRepository;
-    @Autowired
+
     public DemandeServiceImpl(DemandeCongeRepository demandeCongeRepository,SalarieRepository salarieRepository,CongeRepository congeRepository) {
         this.demandeCongeRepository = demandeCongeRepository;
         this.salarieRepository=salarieRepository;
@@ -36,6 +36,7 @@ public class DemandeServiceImpl implements IDemandeService{
     public DemandeConge addDemandeConge(DemandeConge demandeConge) {
         Date datenow= new Date();
         demandeConge.setDate_creation(datenow);
+        demandeConge.setEtat(Etat.created);
         Conge conge=demandeConge.getConge();
         Salarie salarie =demandeConge.getSalarie();
         LocalDate firstDate=conge.getDate_debut();
@@ -50,7 +51,7 @@ public class DemandeServiceImpl implements IDemandeService{
 
         }
         else{
-            return demandeConge;
+            return null;
 
         }
 
@@ -58,6 +59,7 @@ public class DemandeServiceImpl implements IDemandeService{
 
     @Override
     public void removeDemandeConge(DemandeConge demandeConge) {
+        if(demandeConge.getEtat().equals(Etat.refused)) return ;
         Conge conge=demandeConge.getConge();
         Salarie salarie =demandeConge.getSalarie();
         LocalDate firstDate=conge.getDate_debut();
@@ -72,7 +74,11 @@ public class DemandeServiceImpl implements IDemandeService{
 
     @Override
     public DemandeConge updateDemandeConge(DemandeConge demandeConge) {
-        DemandeConge demandeConge1 =demandeCongeRepository.findById(demandeConge.getId_demande()).get();
+        //dans le cas de approved ou validated or refused personnel n'a pas le droit de modifier
+        //son demande ça veut dire dans l'interface n'a plus le droit au button update
+        if(!demandeConge.getEtat().equals(Etat.created)) return null;
+
+        DemandeConge demandeConge1 =getDemandeCongeById(demandeConge.getId_demande());
         Conge conge1=demandeConge1.getConge();
         LocalDate firstDate1=conge1.getDate_debut();
         LocalDate secondDate1=conge1.getDate_fin();
@@ -102,10 +108,10 @@ public class DemandeServiceImpl implements IDemandeService{
         return demandeCongeRepository.findAll();
     }
 
-    @Override
-    public List<DemandeConge> listDemandeCongeByGroupe(Long id) {
+   // @Override
+   /* public List<DemandeConge> listDemandeCongeByGroupe(Long id) {
         return demandeCongeRepository.findByGroupe(id);
-    }
+    }*/
 
     @Override
     public DemandeConge validerDemandeConge(Long id) {

@@ -12,7 +12,7 @@ import com.projetjee.gestionConge.entities.Fonction;
 @Controller
 @RequestMapping(path = "/")
 public class LoginController {
-	
+/*
 	private final String ADMIN = "responsableRH";
 	private final String CHIEF = "chefDeProjet";
 	
@@ -36,5 +36,5 @@ public class LoginController {
 //    		return "salarie-home";
 //    	}
 //    }
-
+*/
 }
