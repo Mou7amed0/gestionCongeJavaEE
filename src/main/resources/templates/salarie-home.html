@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="login-template" lang="en">
+<head>
+    <title>Login</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Espace Numérique du Salarié</h1>
+            
+        </div>
+    </div>
+
+    <p><a href="#" th:href="@{/deconnexion}">Déconnexion</a></p>
+
+</div>
+</body>
+</html>

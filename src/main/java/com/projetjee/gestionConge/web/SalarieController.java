@@ -1,0 +1,93 @@
+package com.projetjee.gestionConge.web;
+
+import com.projetjee.gestionConge.entities.Salarie;
+import com.projetjee.gestionConge.service.IGroupeService;
+import com.projetjee.gestionConge.service.ISalarieService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Controller
+@RequestMapping(path = "/salarie") // pattern path
+public class SalarieController {
+	
+    private final ISalarieService iSalarieService;
+    private final IGroupeService iGroupeService;
+    
+    @Autowired
+    public SalarieController(ISalarieService iSalarieService, IGroupeService iGroupeService) {
+        this.iSalarieService = iSalarieService;
+        this.iGroupeService = iGroupeService;
+    }
+//    @PostMapping(path = "/add")
+//    public Salarie addSalarie(@RequestBody Salarie salarie){
+//        return iSalarieService.addSalarie(salarie);
+//    }
+    
+    @GetMapping("/ajouterNouveauSalarie")
+    public String ajouter(Model model){
+        Salarie salarie = new Salarie();
+        LocalDate date = LocalDate.now();
+        salarie.setDate_embauche(date);
+        model.addAttribute("salarie", salarie);
+        return "ajouterSalarie";
+    }
+    
+    @GetMapping("/ajouterSalarie")
+    public String ajouterSalarie(@ModelAttribute("salarie") Salarie salarie){
+        // Ajouter le salarié à la base de données
+        iSalarieService.addSalarie(salarie);
+        return "redirect:/salarie/listSalarie";
+    }
+    
+    @GetMapping("/modifierSalarie/{id}")
+    public String modifier(@PathVariable (value = "id") long id, Model model){
+        Salarie salarie = iSalarieService.getSalarieById(id);
+        model.addAttribute("salarie", salarie);
+        return "modifierSalarie";
+    }
+    
+    @GetMapping("/modifierSalarie")
+    public String modifierSalarie(@ModelAttribute("salarie") Salarie salarie){
+        // Ajouter le salarié à la base de données
+        iSalarieService.updateSalarie(salarie);
+        return "redirect:/salarie/listSalarie";
+    }
+    
+    
+    @GetMapping(path = "/remove/{id}")
+    public String removeSalarie(@PathVariable(name="id")Long id){
+        iSalarieService.removeSalarie(iSalarieService.getSalarieById(id));
+        
+        return "redirect:/salarie/listSalarie";
+    }
+    @GetMapping(path="/listSalarie/{id}")
+    public String listSalarie(@PathVariable(name="id")Long id,Model model){
+        List<Salarie> listSalarie= iGroupeService.listSalarie(id);
+        model.addAttribute("employes",listSalarie);
+        return "employes";
+    }
+    
+    
+    @GetMapping(path="/listSalarie")
+    public String listSalarie(Model model){
+        List<Salarie> listSalarie= iSalarieService.listSalarie();
+        model.addAttribute("employes",listSalarie);
+        return "employes";
+    }
+
+    
+    @GetMapping(path="/home")
+    public String listSalaries(Model model){
+        List<Salarie> listSalarie= iSalarieService.listSalarie();
+        model.addAttribute("employes",listSalarie);
+        return "employes";
+    }
+    
+    
+}
+
