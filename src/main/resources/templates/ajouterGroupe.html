@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Administrator: Ajouter un groupe</title>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Management des salariés</h1>
+    <hr>
+    <h2>Ajouter salarié</h2>
+
+    <form action="#" th:action="@{/groupe/ajouterGroupe}" th:object="${groupe}" method="GET">
+        <label for="id-groupe">ID groupe</label>
+        <input id="id-groupe" type="number" th:field="*{id_groupe}" placeholder="group ID" class="form-control mb-4 col-4">
+        <label for="nom-groupe">Libellé du groupe</label>
+        <input id="nom-groupe" type="text" th:field="*{nom_groupe}" placeholder="group label" class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2"> Enregistrer groupe</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/groupe/listGroupe}"> Back to Employee List</a>
+</div>
+
+</body>
+</html>
