@@ -19,12 +19,15 @@ public class Salarie implements Serializable {
     private Long id_salarie;
     private String nom;
     private String prenom;
-
     private Integer solde;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date_embauche;
-    @Enumerated(EnumType.STRING)
+
+    @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Fonction fonction;
+
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Groupe groupe;
@@ -32,6 +35,8 @@ public class Salarie implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "login_id", referencedColumnName = "id")
     private Login login;
+
+
     public Salarie(String nom, String prenom, Login login, Integer solde, LocalDate date_embauche, Fonction fonction, Groupe groupe) {
         this.nom = nom;
         this.prenom = prenom;
@@ -46,13 +51,12 @@ public class Salarie implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Collection<DemandeConge> demandeConges;
 
-    public Salarie(String nom, String prenom, Login login, Integer solde, LocalDate date_embauche, Fonction fonction) {
+    public Salarie(String nom, String prenom, Login login, Integer solde, LocalDate date_embauche) {
         this.nom = nom;
         this.prenom = prenom;
         this.login = login;
         this.solde = solde;
         this.date_embauche = date_embauche;
-        this.fonction = fonction;
     }
 
     public Salarie() {

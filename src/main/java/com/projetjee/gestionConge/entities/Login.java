@@ -12,6 +12,7 @@ public class Login {
 	private String username;
 	@Column(name = "PASSWORD")
 	 private String password;
+
 	@OneToOne(mappedBy = "login")
 	private Salarie user;
 

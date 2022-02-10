@@ -11,7 +11,10 @@ public class Groupe implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_groupe;
+
     private String nom_groupe;
+    private String description;
+
     @OneToMany(mappedBy = "groupe",fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Salarie> salaries;
@@ -45,5 +48,13 @@ public class Groupe implements Serializable {
 
     public Groupe(String nom_groupe) {
         this.nom_groupe = nom_groupe;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

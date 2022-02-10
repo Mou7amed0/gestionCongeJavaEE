@@ -71,13 +71,11 @@
                                 </div>
                             </td>
                             <td>
-                                <p th:text="${emp.getLogin()}"  class="text-xs font-weight-bold mb-0"></p>
+                                <p th:text="${emp.getLogin().getUsername()}"  class="text-xs font-weight-bold mb-0"></p>
                             </td>
 
-
-
                             <td class="align-middle text-center text-sm">
-                                <span th:text="${emp.getFonction()}"  class="badge bg-gradient-warning"></span>
+                                <!--<span th:text="${emp.getFonction().id_groupe}"  class="badge bg-gradient-warning"></span>-->
                             </td>
 
                             <td class="align-middle text-center">

@@ -1,6 +1,10 @@
 package com.projetjee.gestionConge.web;
 
+import com.projetjee.gestionConge.entities.Groupe;
+import com.projetjee.gestionConge.entities.Login;
 import com.projetjee.gestionConge.entities.Salarie;
+import com.projetjee.gestionConge.service.GroupeServiceImpl;
+import com.projetjee.gestionConge.service.IGroupeService;
 import com.projetjee.gestionConge.service.ISalarieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +18,7 @@ import java.util.List;
 public class SalarieController {
 	
     private final ISalarieService iSalarieService;
-    
+
     @Autowired
     public SalarieController(ISalarieService iSalarieService) {
         this.iSalarieService = iSalarieService;
@@ -23,8 +27,6 @@ public class SalarieController {
     @GetMapping("/salarie/ajouterNouveauSalarie")
     public String ajouter(Model model){
         Salarie salarie = new Salarie();
-        LocalDate date = LocalDate.now();
-        salarie.setDate_embauche(date);
         model.addAttribute("salarie", salarie);
         return "RH/RHaddEmp";
     }
