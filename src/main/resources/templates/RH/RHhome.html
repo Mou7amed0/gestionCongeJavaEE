@@ -209,12 +209,12 @@
                                 </div>
                             </td>
                             <td>
-                                <p th:text="${emp.getLogin()}"  class="text-xs font-weight-bold mb-0"></p>
+                                <p th:text="${emp.getLogin().username}"  class="text-xs font-weight-bold mb-0"></p>
                             </td>
-                            <td class="align-middle text-center text-sm text-center" th:switch="${emp.getFonction()}">
-                                <span th:case="${T(com.projetjee.gestionConge.entities.Fonction).chefProjet}" th:text="${emp.getFonction()}" class="badge badge-sm text-white bg-gradient-success "></span>
-                                <span th:case="${T(com.projetjee.gestionConge.entities.Fonction).responsableRh}" th:text="${emp.getFonction()}" class="badge badge-sm text-white bg-gradient-warning"></span>
-                                <span th:case="*" th:text="${emp.getFonction()}" class="badge badge-sm text-white bg-gradient-secondary"></span>
+                            <td class="align-middle text-center text-sm text-center" th:switch="${emp.getFonction().getLabel()}">
+                                <span th:case="${'admin'}" th:text="${emp.getFonction().getLabel()}" class="badge badge-sm text-white bg-gradient-success "></span>
+                                <span th:case="${'standard'}" th:text="${emp.getFonction().getLabel()}" class="badge badge-sm text-white bg-gradient-warning"></span>
+                                <span th:case="*" th:text="${emp.getFonction().getLabel()}" class="badge badge-sm text-white bg-gradient-secondary"></span>
                             </td>
                             <td class="align-middle text-center">
                                 <span th:text="${emp.getGroupe().getNom_groupe()}" class="text-secondary text-xs font-weight-bold"></span>

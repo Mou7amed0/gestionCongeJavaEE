@@ -18,23 +18,7 @@ public class LoginController {
 	
 	@GetMapping("/login")
     public String login() {
-		//    	String login = "login", password = "password";
-		//    	model.addAttribute("login", login);
-		//    	model.addAttribute("password", password);
     	return "login";
     }
-    
-//    @GetMapping("/connexion")
-//    public String connexion() {
-//    	String role = "admin";
-//    	switch(role) {
-//    	case "admin":
-//    		return "salarie";
-//    	case "chief":
-//    		return "chief-home";
-//    	default:
-//    		return "salarie-home";
-//    	}
-//    }
 
 }
