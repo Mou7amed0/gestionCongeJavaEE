@@ -2,12 +2,13 @@ package com.projetjee.gestionConge.web;
 import com.projetjee.gestionConge.entities.DemandeConge;
 import com.projetjee.gestionConge.service.IDemandeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "/demandeconge")
+@Controller
 public class DemandeController {
     private final IDemandeService iDemandeService;
     @Autowired
@@ -26,8 +27,10 @@ public class DemandeController {
     public void removeDemandeConge(@PathVariable(name="id")Long id){
         iDemandeService.removeDemandeConge(iDemandeService.getDemandeCongeById(id));
     }
-    @GetMapping(path="/listDemandeConge")
-    public List<DemandeConge> listDemandeConge(){
-        return iDemandeService.listDemandeConge();
+    @GetMapping(path="/RHdemands")
+    public String listDemandeConge(Model model){
+        List<DemandeConge> listDemandeConge= iDemandeService.listDemandeConge();
+        model.addAttribute("listDemandeConge",listDemandeConge);
+        return "RH/RHdemands";
     }
 }

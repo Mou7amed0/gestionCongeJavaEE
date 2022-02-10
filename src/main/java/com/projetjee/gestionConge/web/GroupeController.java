@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping(path = "/groupe")
 public class GroupeController {
 
     private final IGroupeService iGroupeService;
@@ -19,30 +18,22 @@ public class GroupeController {
         this.iGroupeService = iGroupeService;
     }
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/groupe/add")
     public Groupe addGroupe(@RequestBody Groupe groupe){
         return iGroupeService.addGroupe(groupe);
     }
-    @PutMapping(path = "/update")
+    @PutMapping(path = "/groupe/update")
     public Groupe updateGroupe(@RequestBody Groupe groupe){
         return iGroupeService.updateGroupe(groupe);
     }
-    @DeleteMapping(path = "/remove/{id}")
+    @DeleteMapping(path = "/groupe/remove/{id}")
     public void removeGroupe(@PathVariable(name="id")Long id){
         iGroupeService.removeGroupe(iGroupeService.getGroupeById(id));
     }
-    
-   /* @GetMapping(path="/listSalarie")
-    public String listSalarie(Model model){
-        List<Salarie> listSalarie= iSalarieService.listSalarie();
-        model.addAttribute("employes",listSalarie);
-        return "employes";
-    }*/
-    
-    @GetMapping(path="/listGroupe")
+    @GetMapping(path="/RHgroups")
     public String listGroupe(Model model){
     	List<Groupe> listGroupes= iGroupeService.listGroupe();
         model.addAttribute("groupes",listGroupes);
-        return "groupes";
+        return "RH/RHgroups";
     }
 }

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Administrator: Demandes<</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6>Demandes</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table id='myTable' class="table align-items-center mb-0">
+                        <thead>
+
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employé
+                                <div >
+                                    <input style='font-size:small' class=' w-75 h-75 ' type="text" id="name" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                                </div>
+                            </th>
+                            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Groupe
+                                <div >
+                                    <select style='font-size:small;' id='groupe' onchange="myFunction2()" >
+                                        <option disablade selected></option>
+                                        <!--                                                @foreach($grps as $grp)-->
+                                        <!--                                                <option value="{{$grp->Name}}">{{$grp->Name}}</option>-->
+                                        <!--                                                @endforeach-->
+                                    </select>
+                                </div>
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jours Disponibles
+                                <div>
+                                    <input style='font-size:small' class='px-0  w-25 h-75 ' type="text" id="inf" onkeyup="myFunction4()" >
+                                    <span class='mt-1'>&lt;x&lt;</span>
+                                    <input style='font-size:small' class='px-0  w-25 h-75 ' type="text" id="sup" onkeyup="myFunction4()"  >
+                                </div>
+                            </th>
+                            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Etat de demande
+                                <div>
+                                    <select style='font-size:small;' id='etat' onchange="myFunction3()" >
+                                        <option disablade selected></option>
+                                        <option style='font-size:small;' value="VALIDATED"> VALIDATED</option>
+                                        <option style='font-size:small;' value="CREATED">CREATED</option>
+                                        <option style='font-size:small;' value="APPROVED">APPROVED</option>
+                                        <option style='font-size:small;' value="REFUSED">REFUSED</option>
+                                    </select>
+                                </div>
+                            </th>
+                            <th class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">jours demandés
+                                <div>
+                                    <input style='font-size:small' class='px-0  w-25 h-75 ' type="text" id="inf1" onkeyup="myFunction5()" >
+                                    <span class='mt-1'>&lt;x&lt;</span>
+                                    <input style='font-size:small' class='px-0  w-25 h-75 ' type="text" id="sup1" onkeyup="myFunction5()" >
+                                </div>
+                            </th>
+                            <th class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Debut</th>
+                            <th class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fin</th>
+                            <th class="text-secondary opacity-7"></th>
+                            <th class="text-secondary opacity-7"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        <tr th:each="demande: ${listDemandeConge}">
+
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="px-2 d-flex flex-column justify-content-center">
+                                        <h6  style="text-transform: capitalize;" th:text="${demande.getSalarie().getNom()}+' '+${demande.getSalarie().getPrenom()}" class="mb-0 text-sm"></h6>
+                                        <p th:text="${demande.getSalarie().getLogin()}"  class="text-xs text-secondary mb-0"></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td >
+                                <p  id='test' th:text="${demande.getSalarie().getGroupe().getNom_groupe()}" class=" align-middle text-center text-xs font-weight-bold mb-0">{</p>
+                            </td>
+
+                            <td class="align-middle text-center">
+                                <span  th:text="${demande.getSalarie().getSolde()}" class="text-secondary text-xs font-weight-bold"></span>
+                            </td>
+
+                            <td th:switch="${demande.getEtat()}">
+                                <span th:case="${T(com.projetjee.gestionConge.entities.Etat).validated}" th:text="${demande.getEtat()}" class="badge badge-sm text-white bg-gradient-success "></span>
+                                <span th:case="${T(com.projetjee.gestionConge.entities.Etat).approuved}" th:text="${demande.getEtat()}" class="badge badge-sm text-white bg-gradient-warning"></span>
+                                <span th:case="${T(com.projetjee.gestionConge.entities.Etat).refused}" th:text="${demande.getEtat()}" class="badge badge-sm text-white bg-gradient-danger"></span>
+                                <span th:case="*" th:text="${demande.getEtat()}" class="badge badge-sm text-white bg-gradient-secondary"></span>
+                            </td>
+
+                            <td class="align-middle text-center">
+                                <span th:text="${demande.getConge().getDate_fin()}" class="text-secondary text-xs font-weight-bold"></span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold"><a th:text="${demande.getConge().getDate_debut()}" class="text-secondary" href="{{url('/admcalendar')}}"></a></span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold"><a th:text="${demande.getConge().getDate_fin()}" class="text-secondary" href="{{url('/admcalendar')}}"></a></span>
+                            </td>
+
+
+<!--                            <div th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).approuved}"  class="modal fade" th:id="${demande.getId_demande()}+'v'"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+<!--                                <div class="modal-dialog">-->
+<!--                                    <div style="width:80%;" class="modal-content">-->
+
+<!--                                        <div class="modal-header">-->
+<!--                                            <button style="background-color:transparent; border:none;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--                                            <h4 style="font-size: 1rem" class="modal-title" id="myModalLabel">Confirm validation</h4>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="modal-body">-->
+<!--                                            <p>You are about to validate demande</p>-->
+<!--                                            <p>Do you want to proceed?</p>-->
+<!--                                            <p class="debug-url"></p>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="modal-footer">-->
+<!--                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>-->
+<!--                                            <a href="{{url('/validate',$value->Id)}}" class="btn btn-success btn-ok">validate</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).approuved}" class="align-middle">-->
+
+<!--                                <a class="btn btn-link text-success text-gradient px-3 mb-0" data-toggle="modal" th:attr="data-target='#'+${demande.getId_demande()}+'v'"  data-placement="top" title="valider la demande" data-original-title="validate demande"><i class="fa fa-check me-2" aria-hidden="true"></i>valider</a>-->
+<!--                            </td>-->
+
+                            <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).validated}" class="align-middle">
+                                <span class="mx-3 text-secondary text-xs font-weight-bold">demande-validée</span>
+                            </td>
+
+                            <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).refused}" class="align-middle">
+                                <span class="mx-3 text-secondary text-xs font-weight-bold">demande-refusée</span>
+                            </td>
+
+                            <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).created}" class="align-middle">
+                                <span class="mx-3 text-secondary text-xs font-weight-bold">pas-approvée</span>
+                            </td>
+
+
+
+                            <div  class="modal fade" th:id="${demande.getId_demande()+'r'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div style="width:80%;" class="modal-content">
+
+                                        <div class="modal-header">
+                                            <button style="background-color:transparent; border:none;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 style="font-size: 1rem" class="modal-title" id="myModalLabel2">Confirm refuse</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <p>You are about to refuse demande</p>
+                                            <p>Do you want to proceed?</p>
+                                            <p class="debug-url"></p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button  type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            <a href="{{url('/refuse',$value->Id)}}" class="btn btn-danger btn-ok">refuse</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).approuved}" class="align-middle">
+                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" data-toggle="modal" th:attr="data-target='#'+${demande.getId_demande()}+'r'" data-placement="top" title="refuser la demande" data-original-title="refuse demande"><i class="fa fa-times me-2" aria-hidden="true"></i>refuse</a>
+                            </td>
+
+                            <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).validated}" class="align-middle">
+                                <span class="mx-2 text-secondary text-xs font-weight-bold">demande-validée</span>
+                            </td>
+
+                            <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).refused}" class="align-middle">
+                                <span class="mx-2 text-secondary text-xs font-weight-bold">demande-refusée</span>
+                            </td>
+
+                            <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).created}" class="align-middle">
+                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" data-toggle="modal" th:attr="data-target='#'+${demande.getId_demande()}+'r'" data-placement="top" title="refuser la demande" data-original-title="refuse demande"><i class="fa fa-times me-2" aria-hidden="true"></i>refuse</a>
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</body>
+</html>
