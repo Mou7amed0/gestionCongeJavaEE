@@ -157,25 +157,25 @@
             <label for="prenom">Prénom</label>
             <input id="prenom" type="text" th:field="*{prenom}" placeholder="Prénom du salarié" class="form-control mb-4 col-4">
             <label for="login">Login</label>
-            <input id="login" type="text" th:field="*{login}" placeholder="login du salarié" class="form-control mb-4 col-4">
+            <input id="login" type="text" th:field="*{login.username}" placeholder="login du salarié" class="form-control mb-4 col-4">
             <label for="password">Mot de passe</label>
-            <input id="password" type="password" th:field="*{password}" placeholder="mot de pass" class="form-control mb-4 col-4">
+            <input id="password" type="password" th:field="*{login.password}" placeholder="mot de pass" class="form-control mb-4 col-4">
             <label for="solde">Solde de congé</label>
             <input id="solde" type="number" th:field="*{solde}" placeholder="solde congé" class="form-control mb-4 col-4">
             <label for="date_embauche">Date d'embauche</label>
             <input id="date_embauche" type="date" th:field="*{date_embauche}"  class="form-control mb-4 col-4">
             <label for="fonction"></label>
             <select th:field="*{fonction}" id="fonction" class="form-control mb-4 col-4">
-                <option th:value="'standard'">Salarié</option>
-                <option th:value="'chefProjet'" >Chef de projet</option>
-                <option th:value="'responsableRh'">Responsable Ressources Humains</option>
+                <option th:value="1">Salarié</option>
+                <option th:value="2" >Chef de projet</option>
+                <option th:value="3">Responsable Ressources Humains</option>
             </select>
             <label for="groupe"></label>
             <select th:field="*{groupe}" id="groupe" class="form-control mb-4 col-4">
-                <option th:value="1">Administrateurs</option>
-                <option th:value="2">Projet N° 1</option>
-                <option th:value="3">Projet N° 2</option>
-                <option th:value="4">Projet N° 3</option>
+                <option th:value="0">Administrateurs</option>
+                <option th:value="1">Projet N° 1</option>
+                <option th:value="2">Projet N° 2</option>
+                <option th:value="3">Projet N° 3</option>
             </select>
             <button type="submit" class="btn btn-success col-2"> Ajouter salarié</button>
         </form>

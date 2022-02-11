@@ -7,13 +7,18 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
-public class Salarie implements Serializable {
+public class Salarie implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_salarie;
@@ -60,6 +65,10 @@ public class Salarie implements Serializable {
     }
 
     public Salarie() {
+    }
+
+    public Salarie(Login login) {
+        this.login = login;
     }
 
     public Long getId_salarie() {
@@ -132,5 +141,40 @@ public class Salarie implements Serializable {
 
     public void setDemandeConges(Collection<DemandeConge> demandeConges) {
         this.demandeConges = demandeConges;
+    }
+// User details implementation;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("RESPONSABLERH"));
+    }
+
+    @Override
+    public String getPassword() {
+        return login.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return login.getUsername();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

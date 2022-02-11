@@ -10,7 +10,7 @@ import java.util.Collection;
 public class Fonction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_groupe;
+    private Long id;
 
     private String label;
     private String description;
@@ -23,11 +23,11 @@ public class Fonction implements Serializable {
     }
 
     public Long getId_groupe() {
-        return id_groupe;
+        return id;
     }
 
     public void setId_groupe(Long id) {
-        this.id_groupe = id;
+        this.id = id;
     }
 
     public String getLabel() {
