@@ -4,4 +4,5 @@ public interface IdemandeCongeInit {
     void initSalarie();
     void initConge();
     void initDemande();
+
 }

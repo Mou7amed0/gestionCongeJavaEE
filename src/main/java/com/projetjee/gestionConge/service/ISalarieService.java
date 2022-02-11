@@ -10,5 +10,6 @@ public interface ISalarieService {
     Salarie updateSalarie(Salarie  salarie);
     Salarie getSalarieById(Long id);
     List<Salarie> listSalarie();
+    Salarie findByLogin(String username);
 //    Salarie addDemandeCongeToSalarie(int idSalarie, int IdDemandeConge);
 }

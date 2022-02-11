@@ -50,11 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // http.formLogin().loginPage("/login").permitAll();
         http
                 .authorizeRequests()
-                .antMatchers("/RH**/**", "/salarie**/**", "/groupe**/**").hasAuthority("RESPONSABLERH")
-                .antMatchers("/salarie/groupe/**").hasAnyAuthority("CHEFPROJET", "RESPONSABLERH")
-                .antMatchers("/salarie/**").permitAll()
+                //.antMatchers("/RH**/**", "/salarie**/**", "/groupe**/**").hasAuthority("RESPONSABLERH")
+                //.antMatchers("/salarie/groupe/**").hasAnyAuthority("CHEFPROJET", "RESPONSABLERH")
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll();
+                .formLogin().loginPage("/sign-in").permitAll().defaultSuccessUrl("/connexion");
     }
 }

@@ -1,6 +1,7 @@
 package com.projetjee.gestionConge.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +11,10 @@ public class Conge implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_conge;
-    private LocalDate date_debut,date_fin;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date_debut;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date_fin;
     private String motif;
     @OneToOne(mappedBy = "conge")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

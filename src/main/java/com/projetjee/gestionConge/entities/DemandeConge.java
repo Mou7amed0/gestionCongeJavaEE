@@ -1,9 +1,12 @@
 package com.projetjee.gestionConge.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 @Entity
 public class DemandeConge implements Serializable {
@@ -13,7 +16,7 @@ public class DemandeConge implements Serializable {
     private Date date_creation;
     @Enumerated(EnumType.STRING)
     private Etat etat;
-    @OneToOne
+    @OneToOne(cascade ={CascadeType.ALL})
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Conge conge;
     @ManyToOne()
@@ -26,10 +29,17 @@ public class DemandeConge implements Serializable {
     public DemandeConge(Date date_creation, Etat etat, Conge conge, Salarie salarie) {
         this.date_creation = date_creation;
         this.etat = etat;
+
         this.conge = conge;
         this.salarie = salarie;
     }
 
+    public int days(){
+        LocalDate from = conge.getDate_debut();
+        LocalDate to = conge.getDate_fin();
+        int period = Period.between(from, to).getDays();
+        return period;
+    }
     public Long getId_demande() {
         return id_demande;
     }

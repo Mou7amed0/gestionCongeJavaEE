@@ -51,6 +51,12 @@ public class SalarieServiceImpl implements ISalarieService, UserDetailsService {
     }
 
     @Override
+    public Salarie findByLogin(String username) {
+
+        return salarieRepository.findByLogin(username);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Login login = loginRepository.findLoginByUsername(username);
         if (login == null)

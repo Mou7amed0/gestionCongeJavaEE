@@ -58,7 +58,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " th:href="@{/Chefcalender}">
+                <a class="nav-link  " th:href="@{/RHcalender}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>box-3d-50</title>
@@ -189,13 +189,13 @@
                         <tbody>
 
 
-                        <tr th:each="demande: ${listDemandeConge}">
+                        <tr th:each="demande: ${demandes}">
 
                             <td>
                                 <div class="d-flex px-2 py-1">
                                     <div class="px-2 d-flex flex-column justify-content-center">
                                         <h6  style="text-transform: capitalize;" th:text="${demande.getSalarie().getNom()}+' '+${demande.getSalarie().getPrenom()}" class="mb-0 text-sm"></h6>
-                                        <p th:text="${demande.getSalarie().getLogin()}"  class="text-xs text-secondary mb-0"></p>
+                                        <p th:text="${demande.getSalarie().getLogin().getUsername()}"  class="text-xs text-secondary mb-0"></p>
                                     </div>
                                 </div>
                             </td>
@@ -241,7 +241,7 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                            <a href="{{url('/validate',$value->Id)}}" class="btn btn-warning btn-ok">validate</a>
+                                            <a th:href="@{/demand/approuve/{id}(id=${demande.getId_demande()})}" class="btn btn-warning btn-ok">validate</a>
                                         </div>
                                     </div>
                                 </div>
@@ -282,14 +282,13 @@
 
                                         <div class="modal-footer">
                                             <button  type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                            <a href="{{url('/refuse',$value->Id)}}" class="btn btn-danger btn-ok">refuse</a>
+                                            <a th:href="@{/demand/refuse/{id}(id=${demande.getId_demande()})}" class="btn btn-danger btn-ok">refuse</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).approuved}" class="text-center align-middle">
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" data-toggle="modal" th:attr="data-target='#'+${demande.getId_demande()}+'r'" data-placement="top" title="refuser la demande" data-original-title="refuse demande"><i class="fa fa-times me-2" aria-hidden="true"></i>refuse</a>
-                            </td>
+                                <span class="mx-2 text-secondary text-xs font-weight-bold">demande-approuvée</span>                            </td>
 
                             <td th:if="${demande.getEtat()==T(com.projetjee.gestionConge.entities.Etat).validated}" class="text-center align-middle">
                                 <span class="mx-2 text-secondary text-xs font-weight-bold">demande-validée</span>
